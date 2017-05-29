@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block specificsstylesheets %}
+<link href="{{ asset('css/tissus.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+Liste des tissus
+{% endblock %}
+
+{% block menu %}
+{% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block main %}
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Liste des tissus</div>
+  <div class="panel-body">
+    <p>Tous les tissus crées sont listés ci-dessous.</p>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+<thead class=header_tissu">
+	<tr>
+		<th class="num_tissu">N°</th>
+		<th class="image_tissu">Image</th>
+		<th class="name_tissu">Nom</th>
+	{% if no_data %}
+		<th class="couleur_tissu">Couleur</th>
+	{% else %}
+		<th class="couleur_tissu" colspan="{{ couleursMax }}">Couleur</th>
+	{% endif %}
+	</tr>
+	</thead>
+	<tbody>
+	{% if no_data %}
+		<tr><td colspan="4">Il n'y a pas de tissu dans la base.</td></tr>
+	{% else %}
+		{% set i = 0 %}
+		{% for tissu in tissus %}
+			<tr>
+				<td>{{ tissu.id }}</td>
+				<td><img src= "img/tissus/{{ tissu.picturepath }}" height="100" width="100"/></td>
+				<td>{{ tissu.name }}</td>
+				{% for couleur in couleurs[i] %}
+					<td style="background-color: {{ couleur.htmlvalue }};">{{ couleur.name }}</td>
+				{% endfor %}
+				
+			</tr>
+			{% set i = i + 1 %}
+		{% endfor %}
+	{% endif %}
+	</tbody>  </table>
+</div>	
+{% endblock %}

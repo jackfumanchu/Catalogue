@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block specificsstylesheets %}
+<link href="{{ asset('css/tissus.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+Liste des tissus
+{% endblock %}
+
+{% block menu %}
+{% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block main %}
+<div class="panel panel-default">
+	<!-- Default panel contents -->
+	<div class="panel-heading">Nombre d'enregistrements</div>
+	<div class="panel-body">
+		<p>Le nombre d'enregistrements pour la catégorie parente {{ name }} est {{ nb }}.</p>
+	</div>
+	</div>
+</div>
+	
+{% endblock %}

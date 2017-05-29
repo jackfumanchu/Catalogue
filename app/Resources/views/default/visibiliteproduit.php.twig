@@ -1,0 +1,24 @@
+{% block main %}
+<h2>Liste des tissus</h2>
+
+<table>
+	<theader>
+	<td>Id interne</td>
+	<td>Image</td>
+	<td>Nom</td>
+	<td>Description</td>
+	</theader>
+	<tfooter></tfooter>
+	<tbody>
+{% for tissu in tissus %}
+		<tr>
+			<td>{{ tissu.id }}</td>
+			<td><img src= "{{ tissu.picturepath }}" /></td>
+			<td>{{ tissu.name }}</td>
+			<td>{{ tissu.description }}</td>
+			
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

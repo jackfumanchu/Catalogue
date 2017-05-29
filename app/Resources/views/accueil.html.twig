@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block specificsstylesheets %}
+{# <link href="{{ asset('css/products.css') }}" rel="stylesheet"/> #}
+{% endblock %}
+
+{% block title %}
+Bienvenue !
+{% endblock %}
+
+{% block menu %}
+{% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block messages %}
+{{ message|raw }}
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="thumbnail">
+			<div class="caption">
+				<h3>Produits</h3>
+				<p>Créer un produit ou voir la liste des produits, c'est possible en cliquant sur un des boutons ci-dessous.</p>
+				<p class="center">
+					<div class="btn-group">
+						<a href="/creerProduit" class="btn btn-primary" role="button">Créer produit</a> 
+						<a href="/voirProduits" class="btn btn-default" role="button">Voir les produits</a>
+					</div>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-md-6">
+			<div class="thumbnail">
+				<div class="caption">
+					<h3>Tissus</h3>
+					<p>Créer un tissu ou voir la liste des tissus, c'est possible en cliquant sur un des boutons ci-dessous.</p>
+					<p>
+						<div class="btn-group">
+							<a href="/creerTissu" class="btn btn-primary" role="button">Créer tissu</a> 
+							<a href="/voirTissus" class="btn btn-default" role="button">Voir les tissus</a>
+						</div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-md-6">
+			<div class="thumbnail">
+				<div class="caption">
+					<h3>Catégories</h3>
+					<p>Créer une catégorie ou voir la liste des catégories, c'est possible en cliquant sur un des boutons ci-dessous.</p>
+					<p>
+						<div class="btn-group">
+							<a href="/creerCategorie" class="btn btn-primary" role="button">Créer catégorie</a> 
+							<a href="/voirCategories" class="btn btn-default" role="button">Voir les catégories</a>
+						</div>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+

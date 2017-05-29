@@ -1,0 +1,112 @@
+<?php
+// src/AppBundle/Entity/Product.php
+namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+class Options
+{
+	private $id;
+    private $name; // Le nom (label) associé à l'option. Par exemple, "Bande du haut" pour un carnet de santé à trois bandes
+	private $category; //Une catégorie seulement par option => Une catégorie a plusieurs options
+	private $optiontissu;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->optiontissu = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Options
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add optiontissu
+     *
+     * @param \AppBundle\Entity\OptionTissu $optiontissu
+     *
+     * @return Options
+     */
+    public function addOptiontissu(\AppBundle\Entity\OptionTissu $optiontissu)
+    {
+        $this->optiontissu[] = $optiontissu;
+
+        return $this;
+    }
+
+    /**
+     * Remove optiontissu
+     *
+     * @param \AppBundle\Entity\OptionTissu $optiontissu
+     */
+    public function removeOptiontissu(\AppBundle\Entity\OptionTissu $optiontissu)
+    {
+        $this->optiontissu->removeElement($optiontissu);
+    }
+
+    /**
+     * Get optiontissu
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOptiontissu()
+    {
+        return $this->optiontissu;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Options
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+}

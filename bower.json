@@ -1,0 +1,14 @@
+{
+  "name": "GestionCatalogue",
+  "description": "plop",
+  "main": "bower.json",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,45 @@
+input[type=radio]
+{
+	display: none;
+}
+
+input[type=radio] + label
+{
+	z-index: 1;
+	vertical-align: middle;
+	padding: 0 0 0 0px;
+	height: 50px;
+	width: 50px;
+	display:inline-block;
+	position: relative;
+	margin-right: 5px;
+}
+
+input[type=radio]:checked + label
+{
+	z-index: 1;
+	display:inline-block;
+	padding: 0 0 0 0px;
+}
+
+input[type=radio] + label span
+{
+	z-index: 10;
+	position: absolute;
+	content: '';
+	display: block;
+	padding: 0 0 0 0px;
+	width: 50px;
+	height: 50px;
+}
+
+input[type=radio]:checked + label span
+{
+	position: absolute;
+	z-index: 10;
+	content: '';
+	display: block;
+	padding: 0 0 0 0px;
+	width: 50px;
+	height: 50px;
+}

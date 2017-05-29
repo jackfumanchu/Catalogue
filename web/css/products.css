@@ -1,0 +1,6 @@
+@import url("checkboxes.css");
+
+input[type=radio]:checked + label span
+{
+	background-color: rgba(220, 190, 80, 0.5);
+}

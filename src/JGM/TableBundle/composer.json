@@ -1,0 +1,43 @@
+{
+    "name" : "jgm/tablebundle",
+    "description" : "Bundle for creating data tables for symfony application.",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Jan Mühlig",
+        "email" : "mail@janmuehlig.de"
+    }],
+    "keywords" : [
+        "symfony",
+		"table",
+		"data table",
+		"simple tables",
+		"bundle",
+		"pagination",
+		"filter",
+		"search"
+    ],
+    "license" : [ "MIT" ],
+    "require" : {
+		"php": ">=5.3.9",
+		"symfony/symfony": ">=2.5",
+		"symfony/config": ">=2.5",
+		"symfony/yaml": ">=2.5",
+		"symfony/security": ">=2.5",
+		"symfony/templating": ">=2.5",
+		"symfony/http-foundation": ">=2.5",
+		"symfony/http-kernel": ">=2.5",
+		"symfony/dependency-injection": ">=2.5",
+		"doctrine/common": ">=2.3"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "JGM\\TableBundle" : ""
+        }
+    },
+    "target-dir" : "JGM/TableBundle",
+    "extra" : {
+    	"branch-alias" : {
+            "dev-master" : "1.4-dev"
+        }
+    }
+}

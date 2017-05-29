@@ -1,0 +1,26 @@
+# src/AppBundle/Resources/config/doctrine/OptionTissu.orm.yml
+AppBundle\Entity\OptionTissu:
+    type: entity
+    repositoryClass: AppBundle\Repository\OptionTissuRepository
+    table: optiontissu
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    manyToOne:
+        option:
+            targetEntity: Options
+            inversedBy: optiontissu
+            joinColumn:
+                name: option_id
+                referencedColumnName: id
+        tissu:
+            targetEntity: Tissu
+            inversedBy: optiontissu
+            joinColumn:
+                name: tissu_id
+                referencedColumnName: id
+    manyToMany:
+        product:
+            targetEntity: Product
+            mappedBy: optiontissu   

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block specificsstylesheets %}
+<link href="{{ asset('css/tissus.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+Liste des catégories
+{% endblock %}
+
+{% block menu %}
+{% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block main %}
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Liste des produits</div>
+  <div class="panel-body">
+    <p>Toutes les catégories créées sont listées ci-dessous.</p>
+  </div>
+
+  <!-- Table -->
+	{{ table(categoryTable) }}
+</div>	
+{% endblock %}

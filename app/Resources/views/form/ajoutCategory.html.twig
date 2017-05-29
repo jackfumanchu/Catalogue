@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block specificsstylesheets %}
+{% endblock %}
+
+{% block title %}
+Création d'une catégorie
+{% endblock %}
+
+
+{% block menu %}
+{% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block main %}
+<h1>Création d'une catégorie</h1>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Création d'un catégorie</div>
+  <div class="panel-body">
+    <p>Seul le champ du nom est obligatoire.<br/>
+	Une catégorie n'a pas forcément de parent (commes les doudous par exemple).
+	</p>
+  </div>
+{{ form(form) }}
+</div>
+{% endblock %}

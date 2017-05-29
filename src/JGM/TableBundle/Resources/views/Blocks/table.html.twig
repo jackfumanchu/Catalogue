@@ -1,0 +1,67 @@
+{% block table %}
+{% spaceless %}
+{{ table_begin(view) }}
+{{ table_head(view) }}
+{{ table_body(view) }}
+{{ table_end(view) }}
+{% if isPaginatable %}
+{{ table_pagination(view) }}
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block table_begin %}
+{% spaceless %}
+{% if isSelectable %}
+<form name="form_selection_{{ name }}" method="post">
+<input type="hidden" name="is_selection_{{ name }}" value="{{ name }}" />
+{% endif %}
+<table id="{{ name }}"{{ attributes|format_attributes }}>
+{% endspaceless %}
+{% endblock %}
+
+{% block table_end %}
+{% spaceless %}
+{% if isSelectable and renderSelectionButtons %}
+	<tfoot>
+		<tr>
+			<td colspan="{{ columnsLength }}">{{ selection_buttons(tableView) }}</td>
+		</tr>
+	</tfoot>
+{% endif %}
+</table>
+{% if isSelectable %}
+</form>
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block table_head %}
+{% spaceless %}
+<thead>
+	<tr>
+		{% for column in columns %}
+		<th{{ column.headAttributes|format_attributes }}>{{ column.label }}</th>
+		{% endfor %}
+	</tr>
+</thead>
+{% endspaceless %}
+{% endblock %}
+
+{% block table_body %}
+{% spaceless %}
+<tbody>
+{% for row in rows %}
+<tr{{ tableView.rowAttributes(row)|format_attributes }}>
+	{% for column in columns %}
+	<td{{ column.attributes|format_attributes }}>{{ column.content(row)|raw }}</td>
+	{% endfor %}
+</tr>
+{% else %}
+<tr>
+	<td colspan="{{ columns|length }}">{{ emptyValue }}</td>
+</tr>
+{% endfor %}
+</tbody>
+{% endspaceless %}
+{% endblock %}

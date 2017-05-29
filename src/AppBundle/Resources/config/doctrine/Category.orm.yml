@@ -1,0 +1,30 @@
+# src/AppBundle/Resources/config/doctrine/Category.orm.yml
+AppBundle\Entity\Category:
+    type: entity
+    repositoryClass: AppBundle\Repository\CategoryRepository
+    table: category
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        numberSubCategory:
+            type: integer
+            nullable: true
+    oneToMany:
+        products:
+            targetEntity: Product
+            mappedBy: category
+        children:
+            targetEntity: Category
+            mappedBy: parent
+        options:
+            targetEntity: Options
+            mappedBy: category
+    manyToOne:
+        parent:
+            targetEntity: Category
+            inversedBy: children

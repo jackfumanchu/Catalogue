@@ -1,0 +1,23 @@
+AppBundle\Entity\Options:
+    type: entity
+    repositoryClass: AppBundle\Repository\OptionRepository
+    table: options
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: options
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+    oneToMany:
+        optiontissu:
+            targetEntity: OptionTissu
+            mappedBy: option

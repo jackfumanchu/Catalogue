@@ -1,0 +1,27 @@
+@import url("checkboxes.css");
+
+input[type=checkbox]:checked + label span
+{
+	border: 1px solid blue;
+}
+
+.tissu_table
+{
+	width: 100%;
+}
+
+thead.header_tissu
+{
+	text-align: center;
+}
+
+.num_tissu
+	{width:40px; text-align: center;}
+.image_tissu{
+	width:120px; text-align: center;}
+.name_tissu{
+	text-align:center;}
+.description_tissu{
+	text-align:center;}
+.couleur_tissu{
+	text-align:center;}

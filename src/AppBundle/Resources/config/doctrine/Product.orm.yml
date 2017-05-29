@@ -1,0 +1,56 @@
+# src/AppBundle/Resources/config/doctrine/Product.orm.yml
+AppBundle\Entity\Product:
+    type: entity
+    table: product
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        description:
+            type: text
+        picturepath:
+            type: string
+            length: 50
+        reference:
+            type: string
+            length: 20
+        prixPublic:
+            type: decimal
+        prixPro:
+            type: decimal
+        prixMarche:
+            type: decimal
+    manyToMany:
+        tissu:
+            targetEntity: Tissu
+            inversedBy: product
+            joinTable:
+                name: tissu_product
+                joinColumns:
+                    product_id:
+                        referencedColumnName: id
+                inverseJoinColumn:
+                    tissu_id:
+                        referencedColumnName: id
+        option:
+            targetEntity: Options
+            inversedBy: product
+            joinTable:
+                name: options_product
+                joinColumns:
+                    product_id:
+                        referencedColumnName: id
+                inverseJoinColumn:
+                    option_id:
+                        referencedColumnName: id
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: products
+            joinColumn:
+                name: category_id
+                referencedColumnName: id

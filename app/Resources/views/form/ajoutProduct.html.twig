@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+ {# {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %} #}
+
+{# {% form_theme form 'form/produits.html.twig' %} #}
+
+{%- block form_label -%}
+{%- endblock form_label -%}
+
+{% block specificsstylesheets %}
+<link href="{{ asset('css/products.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block title %}
+Création d'un produit
+{% endblock %}
+
+
+{% block menu %}
+{% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block main %}
+
+<h1>Création d'un produit</h1>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Formulaire de création d'un produit</div>
+  <div class="panel-body">
+    <p>Tous les champs sont obligatoires.<br/>
+	Seule une catégorie est possible.
+	</p>
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+<div class="form-group">
+    {{ form_label(form.name, form.name.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_errors(form.name) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.description, form.description.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_errors(form.description) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.prixPublic, form.prixPublic.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.prixPublic, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_errors(form.prixPublic) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.prixPro, form.prixPro.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.prixPro, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_errors(form.prixPro) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.prixMarche, form.prixMarche.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.prixMarche, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_errors(form.prixMarche) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.picturepath, form.picturepath.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.picturepath, {'attr': {'class': 'btn-default btn'}}) }}
+    </div>
+    {{ form_errors(form.picturepath) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.category, form.category.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {{ form_errors(form.category) }}
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		{{ form_label(form.option, form.option.vars.label) }}
+	</div>
+	<div class="panel-body">
+		<div class="form-group listofoptions" id="product_option" onload="removeBadLines()">
+			<div id="toberemovedOptions">
+				{{ form_errors(form.option) }}
+				{{ form_widget(form.option, {'attr': {'class': 'form-control', } }) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="form-group">
+    {{ form_label(form.save, form.save.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.save, {'attr': {'class': 'form-control btn-primary'}}) }}
+    </div>
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}
+  </div> <!-- End of panel body -->
+</div><!-- End of panel -->
+
+{% endblock %}
+
+{% block specificsjavascripts %}
+<script>
+var $category = $('#product_category');
+// When category gets selected ...
+$category.change(function() {
+  // ... retrieve the corresponding form.
+  var $form = $(this).closest('form');
+  // Simulate form data, but only include the selected category value.
+  var data = {};
+  data[$category.attr('name')] = $category.val();
+  // Submit data via AJAX to the form's action path.
+	$.ajax({
+		url: '/jsonGetOptions',
+		type: 'get',
+		data: data,
+		success:function(html) {
+			$('#product_option').replaceWith($(html));//.find('#product_option'));
+//			$('#product_option').replaceWith("");
+			},
+		error: function(data) {
+			$('#product_option').replaceWith("Shit !");
+		},
+	});
+});
+var $toberemoved = $('#toberemovedOptions');
+function removeBadLines()
+{
+	$(toberemoved).replaceWith("");
+}
+</script>
+{% endblock %}

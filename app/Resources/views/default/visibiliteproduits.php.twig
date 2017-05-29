@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block specificsstylesheets %}
+<link href="{{ asset('css/produits.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+Liste des produits
+{% endblock %}
+
+{% block menu %}
+{% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block main %}
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Liste des produits</div>
+  <div class="panel-body">
+    <p>Tous les produits crées sont listés ci-dessous.</p>
+  </div>
+
+  <!-- Table -->
+{{ table(produits_table) }}
+</div>	
+{% endblock %}
