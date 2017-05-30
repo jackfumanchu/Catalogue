@@ -156,10 +156,6 @@ class ProductsController extends Controller
 		{
 			throw new HttpException(400, "La catégorie n'est pas bonne.");
 		}
-		if (!$product->getTissu())
-		{
-			throw new HttpException(400, "Il faut entrer au moins un tissu.");
-		}
 		
 		// On crée un EntityManager pour accéder aux données dans la base
 		$em = $this->getDoctrine()->getManager();
@@ -169,7 +165,6 @@ class ProductsController extends Controller
 		// On récupère la valeur du numéro dans la catégorie pour l'inscrire en deuxième position
 		$category_number = $product->getCategory()->getNumberSubCategory();
 		
-		echo "Parent & Number : " .$category_number." & ".$parent_category_id;
 		// on récupère les ID des différentes catégories mères
 		$catmereid = $em
 			->createQuery(
@@ -202,10 +197,6 @@ class ProductsController extends Controller
 			->setParameter('santename', "Carnet de santé")
 			->getSingleScalarResult();
 		
-		echo "ID doudou = ".$doudou_id[0];
-		echo "ID Mobile = ".$mobile_id[0];
-		echo "ID Santé = ".$sante_id[0];
-		
 		// En fonction de la catégorie parent, on récupère la façon de générer le code
 		$reference = sprintf("%'.02d%'.02d", $parent_category_id, $category_number);
 		switch ($parent_category_id)
@@ -215,9 +206,9 @@ class ProductsController extends Controller
 			case $mobile_id: // 
 				break;
 			case $sante_id:
-				foreach ($product->getTissu() as $tissu)
+				foreach ($product->getOptionTissuProduit() as $otp)
 				{
-					$reference = sprintf("%s%'.02d", $reference, $tissu->getId());
+					$reference = sprintf("%s%'.02d%'.02d", $reference, $otp->getOption()->getId(), $otp->getTissu()->getId());
 				}
 				break;
 		}

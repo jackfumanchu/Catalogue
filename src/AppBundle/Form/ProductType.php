@@ -76,21 +76,7 @@ class ProductType extends AbstractType
 				},
 				'placeholder' => '',
 			))
-/*			->add('option',  EntityType::class, array(
-				'class' => 'AppBundle:Options',
-				'choice_label' => 'name',
-				'multiple' => false,
-				'placeholder' => '',
-				'required' => false
-			))
-			->add('tissu',  EntityType::class, array(
-				'class' => 'AppBundle:Tissu',
-				'choice_label' => 'name',
-				'multiple' => false,
-				'placeholder' => '',
-				'required' => false,
-			))
-*/			->add('optiontissuproduit', CollectionType::class, array(
+			->add('optiontissuproduit', CollectionType::class, array(
 				'entry_type'   => OptionTissuProduitType::class,
 				'allow_add'    => true,
 				'allow_delete' => true,

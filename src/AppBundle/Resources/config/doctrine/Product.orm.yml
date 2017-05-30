@@ -17,7 +17,7 @@ AppBundle\Entity\Product:
             length: 50
         reference:
             type: string
-            length: 20
+            length: 40
         prixPublic:
             type: decimal
         prixPro:

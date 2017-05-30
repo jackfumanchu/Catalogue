@@ -2,14 +2,17 @@
 namespace AppBundle\Form;
 
 use AppBundle\Repository\CategoryRepository;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-
+use AppBundle\Form\OptionsType;
 use AppBundle\Entity\Category;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class CategoryType extends AbstractType
@@ -30,9 +33,13 @@ class CategoryType extends AbstractType
 				'multiple' => false,
 				'required' => false,
 			))
+			->add('options', CollectionType::class, array(
+				'entry_type'   => OptionsType::class,
+				'allow_add'    => true,
+				'allow_delete' => true,
+			))
 			->add('save', SubmitType::class, array(
 				'label' => 'Ajouter la catégorie', 
-//				'label_attr' => array('class'=>'btn-default btn',)
 			))
 		;
 	}

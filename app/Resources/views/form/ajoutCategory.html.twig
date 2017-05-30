@@ -21,9 +21,102 @@ Création d'une catégorie
   <div class="panel-heading">Création d'un catégorie</div>
   <div class="panel-body">
     <p>Seul le champ du nom est obligatoire.<br/>
-	Une catégorie n'a pas forcément de parent (commes les doudous par exemple).
+	Une catégorie n'a pas forcément de parent (commes les doudous par exemple) : dans ce cas, les options ne sont pas obligatoires.
+	
 	</p>
   </div>
-{{ form(form) }}
+	{{ form_start(form) }}
+	{{ form_row(form.name) }}
+	{{ form_row(form.parent) }}
+	{{ form_row(form.options) }}
+	<div class="form-group"><div class="col-sm-2"></div><div class="col-sm-10">
+	<a href="#" id="add_option" class="btn btn-default">Ajouter une option</a></div></div>
+	<div class="form-group">
+		<div class="col-sm-2"></div>
+			<div class="col-sm-10">
+			Avant d'ajouter la catégorie, il faut vérifier que toutes les options ont bien été ajoutées.
+			</div>
+		</div>
+	</di>
+	<div class="form-group">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-10">
+      {{ form_widget(form.save, {'attr': {'class': 'form-control btn-warning'}}) }}
+    </div>
+	</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+
 </div>
+{% endblock %}
+
+{% block specificsjavascripts %}
+{# Voici le script en question : #}
+<script type="text/javascript">
+  $(document).ready(function() {
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $container = $('div#category_options');
+
+    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+    var index = $container.find(':input').length;
+
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $('#add_option').click(function(e) {
+      addOption($container);
+
+      e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+      return false;
+    });
+
+    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+    if (index == 0) {
+      addOption($container);
+    } else {
+      // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+      $container.children('div').each(function() {
+        addDeleteLink($(this));
+      });
+    }
+
+    // La fonction qui ajoute un formulaire CategoryType
+    function addOption($container) {
+      // Dans le contenu de l'attribut « data-prototype », on remplace :
+      // - le texte "__name__label__" qu'il contient par le label du champ
+      // - le texte "__name__" qu'il contient par le numéro du champ
+      var template = $container.attr('data-prototype')
+        .replace(/__name__label__/g, 'Option n°' + (index+1))
+        .replace(/__name__/g,        index)
+      ;
+
+      // On crée un objet jquery qui contient ce template
+      var $prototype = $(template);
+
+      // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+      addDeleteLink($prototype);
+
+      // On ajoute le prototype modifié à la fin de la balise <div>
+      $container.append($prototype);
+
+      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+      index++;
+    }
+
+    // La fonction qui ajoute un lien de suppression d'une catégorie
+    function addDeleteLink($prototype) {
+      // Création du lien
+      var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+      // Ajout du lien
+      $prototype.append($deleteLink);
+
+      // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+      $deleteLink.click(function(e) {
+        $prototype.remove();
+
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        return false;
+      });
+    }
+  });
+</script>
 {% endblock %}

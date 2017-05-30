@@ -23,8 +23,6 @@ class Product
 	private $prixPublic;
 	private $prixPro;
 	private $prixMarche;
-	private $option;
-	private $tissu;
 	private $optiontissuproduit;
 
 	public function __toString()
@@ -142,43 +140,8 @@ class Product
      */
     public function __construct()
     {
-        $this->tissu = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->option = new \Doctrine\Common\Collections\ArrayCollection();		
     }
 
-    /**
-     * Add tissu
-     *
-     * @param \AppBundle\Entity\Tissu $tissu
-     *
-     * @return Product
-     */
-    public function addTissu(\AppBundle\Entity\Tissu $tissu)
-    {
-        $this->tissu[] = $tissu;
-
-        return $this;
-    }
-
-    /**
-     * Remove tissu
-     *
-     * @param \AppBundle\Entity\Tissu $tissu
-     */
-    public function removeTissu(\AppBundle\Entity\Tissu $tissu)
-    {
-        $this->tissu->removeElement($tissu);
-    }
-
-    /**
-     * Get tissu
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTissu()
-    {
-        return $this->tissu;
-    }
 
     /**
      * Set category
@@ -274,40 +237,6 @@ class Product
     public function getPrixMarche()
     {
         return $this->prixMarche;
-    }
-
-    /**
-     * Add option
-     *
-     * @param \AppBundle\Entity\Options $option
-     *
-     * @return Product
-     */
-    public function addOption(\AppBundle\Entity\Options $option)
-    {
-        $this->option[] = $option;
-
-        return $this;
-    }
-
-    /**
-     * Remove option
-     *
-     * @param \AppBundle\Entity\Options $option
-     */
-    public function removeOption(\AppBundle\Entity\Options $option)
-    {
-        $this->option->removeElement($option);
-    }
-
-    /**
-     * Get option
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOption()
-    {
-        return $this->option;
     }
 
     /**
