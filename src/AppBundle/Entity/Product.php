@@ -25,7 +25,8 @@ class Product
 	private $prixMarche;
 	private $option;
 	private $tissu;
-	
+	private $optiontissuproduit;
+
 	public function __toString()
 	{
 		return "Mon nom est ".$name;
@@ -142,8 +143,7 @@ class Product
     public function __construct()
     {
         $this->tissu = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->optiontissu = new \Doctrine\Common\Collections\ArrayCollection();
-		
+        $this->option = new \Doctrine\Common\Collections\ArrayCollection();		
     }
 
     /**
@@ -277,60 +277,70 @@ class Product
     }
 
     /**
-     * Add optiontissu
+     * Add option
      *
-     * @param \AppBundle\Entity\OptionTissu $optiontissu
+     * @param \AppBundle\Entity\Options $option
      *
      * @return Product
      */
-    public function addOptiontissu(\AppBundle\Entity\OptionTissu $optiontissu)
+    public function addOption(\AppBundle\Entity\Options $option)
     {
-        $this->optiontissu[] = $optiontissu;
+        $this->option[] = $option;
 
         return $this;
     }
 
     /**
-     * Remove optiontissu
+     * Remove option
      *
-     * @param \AppBundle\Entity\OptionTissu $optiontissu
+     * @param \AppBundle\Entity\Options $option
      */
-    public function removeOptiontissu(\AppBundle\Entity\OptionTissu $optiontissu)
+    public function removeOption(\AppBundle\Entity\Options $option)
     {
-        $this->optiontissu->removeElement($optiontissu);
-    }
-
-    /**
-     * Get optiontissu
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOptiontissu()
-    {
-        return $this->optiontissu;
-    }
-
-    /**
-     * Set option
-     *
-     * @param string $option
-     *
-     * @return Product
-     */
-    public function setOption($option)
-    {
-        $this->option = $option;
-
-        return $this;
+        $this->option->removeElement($option);
     }
 
     /**
      * Get option
      *
-     * @return string
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOption()
     {
         return $this->option;
+    }
+
+    /**
+     * Add optiontissuproduit
+     *
+     * @param \AppBundle\Entity\OptionTissuProduit $optiontissuproduit
+     *
+     * @return Product
+     */
+    public function addOptiontissuproduit(\AppBundle\Entity\OptionTissuProduit $optiontissuproduit)
+    {
+        $this->optiontissuproduit[] = $optiontissuproduit;
+
+        return $this;
+    }
+
+    /**
+     * Remove optiontissuproduit
+     *
+     * @param \AppBundle\Entity\OptionTissuProduit $optiontissuproduit
+     */
+    public function removeOptiontissuproduit(\AppBundle\Entity\OptionTissuProduit $optiontissuproduit)
+    {
+        $this->optiontissuproduit->removeElement($optiontissuproduit);
+    }
+
+    /**
+     * Get optiontissuproduit
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOptiontissuproduit()
+    {
+        return $this->optiontissuproduit;
     }
 }

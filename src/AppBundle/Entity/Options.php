@@ -10,12 +10,13 @@ class Options
     private $name; // Le nom (label) associé à l'option. Par exemple, "Bande du haut" pour un carnet de santé à trois bandes
 	private $category; //Une catégorie seulement par option => Une catégorie a plusieurs options
 	private $product;
+	private $optiontissuproduit;
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->optiontissu = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->product = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -80,4 +81,72 @@ class Options
 	{
 		return $this->name;
 	}
+
+    /**
+     * Add product
+     *
+     * @param \AppBundle\Entity\Product $product
+     *
+     * @return Options
+     */
+    public function addProduct(\AppBundle\Entity\Product $product)
+    {
+        $this->product[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \AppBundle\Entity\Product $product
+     */
+    public function removeProduct(\AppBundle\Entity\Product $product)
+    {
+        $this->product->removeElement($product);
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Add optiontissuproduit
+     *
+     * @param \AppBundle\Entity\OptionTissuProduit $optiontissuproduit
+     *
+     * @return Options
+     */
+    public function addOptiontissuproduit(\AppBundle\Entity\OptionTissuProduit $optiontissuproduit)
+    {
+        $this->optiontissuproduit[] = $optiontissuproduit;
+
+        return $this;
+    }
+
+    /**
+     * Remove optiontissuproduit
+     *
+     * @param \AppBundle\Entity\OptionTissuProduit $optiontissuproduit
+     */
+    public function removeOptiontissuproduit(\AppBundle\Entity\OptionTissuProduit $optiontissuproduit)
+    {
+        $this->optiontissuproduit->removeElement($optiontissuproduit);
+    }
+
+    /**
+     * Get optiontissuproduit
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOptiontissuproduit()
+    {
+        return $this->optiontissuproduit;
+    }
 }

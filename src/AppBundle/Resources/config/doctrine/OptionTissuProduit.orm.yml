@@ -1,0 +1,27 @@
+AppBundle\Entity\OptionTissuProduit:
+    type: entity
+    repositoryClass: AppBundle\Repository\OptionTissuProduitRepository
+    table: optionstissuproduit
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }       
+    manyToOne:
+        produit:
+            targetEntity: Product
+            inversedBy: optiontissuproduit
+            joinColumn:
+                name: product_id
+                referencedColumnName: id
+        option:
+            targetEntity: Options
+            inversedBy: optiontissuproduit
+            joinColumn:
+                name: option_id
+                referencedColumnName: id
+        tissu:
+            targetEntity: Tissu
+            inversedBy: optiontissuproduit
+            joinColumn:
+                name: tissu_id
+                referencedColumnName: id

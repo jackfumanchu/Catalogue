@@ -17,7 +17,7 @@ class Tissu
      * @Assert\File(mimeTypes={ "image/png", "image/jpg", "image/jpeg", "image/bmp" })
      */
 	private $picturepath;
-	private $optiontissu;
+	private $optiontissuproduit;
 		
     /**
      * Constructor
@@ -26,7 +26,6 @@ class Tissu
     {
         $this->product = new \Doctrine\Common\Collections\ArrayCollection();
         $this->couleur = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->optiontissu = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 	public function __toString()
@@ -159,37 +158,38 @@ class Tissu
         return $this->couleur;
     }
 
+
     /**
-     * Add optiontissu
+     * Add optiontissuproduit
      *
-     * @param \AppBundle\Entity\OptionTissu $optiontissu
+     * @param \AppBundle\Entity\OptionTissuProduit $optiontissuproduit
      *
      * @return Tissu
      */
-    public function addOptiontissu(\AppBundle\Entity\OptionTissu $optiontissu)
+    public function addOptiontissuproduit(\AppBundle\Entity\OptionTissuProduit $optiontissuproduit)
     {
-        $this->optiontissu[] = $optiontissu;
+        $this->optiontissuproduit[] = $optiontissuproduit;
 
         return $this;
     }
 
     /**
-     * Remove optiontissu
+     * Remove optiontissuproduit
      *
-     * @param \AppBundle\Entity\OptionTissu $optiontissu
+     * @param \AppBundle\Entity\OptionTissuProduit $optiontissuproduit
      */
-    public function removeOptiontissu(\AppBundle\Entity\OptionTissu $optiontissu)
+    public function removeOptiontissuproduit(\AppBundle\Entity\OptionTissuProduit $optiontissuproduit)
     {
-        $this->optiontissu->removeElement($optiontissu);
+        $this->optiontissuproduit->removeElement($optiontissuproduit);
     }
 
     /**
-     * Get optiontissu
+     * Get optiontissuproduit
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOptiontissu()
+    public function getOptiontissuproduit()
     {
-        return $this->optiontissu;
+        return $this->optiontissuproduit;
     }
 }

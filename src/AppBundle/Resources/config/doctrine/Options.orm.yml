@@ -17,7 +17,11 @@ AppBundle\Entity\Options:
             joinColumn:
                 name: category_id
                 referencedColumnName: id
+    manyToMany:
+        product:
+            targetEntity: Product
+            mappedBy: option
     oneToMany:
-        optiontissu:
-            targetEntity: OptionTissu
+        optiontissuproduit:
+            targetEntity: OptionTissuProduit
             mappedBy: option

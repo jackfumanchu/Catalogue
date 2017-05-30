@@ -54,3 +54,7 @@ AppBundle\Entity\Product:
             joinColumn:
                 name: category_id
                 referencedColumnName: id
+    oneToMany:
+        optiontissuproduit:
+            targetEntity: OptionTissuProduit
+            mappedBy: produit

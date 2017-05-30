@@ -50,7 +50,9 @@ class ProductsController extends Controller
 		$session->getFlashBag()->clear();
 		if ($form->isSubmitted() && $form->isValid()) {
 			$produit = $form->getData();
-			
+//			$tissu = $produit->getTissu();
+//			$option = $produit->getOption();
+			$optiontissuproduit = new OptionTissuProduit();
 			$file = $produit->getPicturepath();
 			if ($file)
 			{
@@ -60,9 +62,16 @@ class ProductsController extends Controller
 					$this->getParameter('img_produits_directory'),
 					$fileName
 				);
+//				foreach($option as $opt)
+//				{
+//					$optiontissuproduit[]->setOption($opt->getId())->setProduit($produit->getId())->setTissu($tissu[$i]->getId());
+//				}
 				$produit->setReference($this->calculateReference($produit));
 				$produit->setPicturepath($fileName);
 				$em->persist($produit);
+				$em->persist($tissu);
+				$em->persist($option);
+//				$em->persist($optiontissuproduit);
 				$em->flush();
 				$session->getFlashBag()->add('success','Le produit de référence '.$produit->getReference().' et ayant pour Id '.$produit->getId().' a bien été ajouté !');
 				return $this->redirectToRoute('index');

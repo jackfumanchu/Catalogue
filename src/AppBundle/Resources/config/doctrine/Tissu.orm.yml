@@ -29,7 +29,6 @@ AppBundle\Entity\Tissu:
                     couleur_id:
                         referencedColumnName: id
     oneToMany:
-        optiontissu:
-            targetEntity: OptionTissu
-            mappedBy: tissu
-        
+        optiontissuproduit:
+            targetEntity: OptionTissuProduit
+            mappedBy: tissu        
