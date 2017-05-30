@@ -14,9 +14,9 @@ AppBundle\Entity\Tissu:
             type: string
             length: 50
     manyToMany:
-        product:
-            targetEntity: Product
-            mappedBy: tissu   
+#        product:
+#            targetEntity: Product
+#            mappedBy: tissu   
         couleur:
             targetEntity: Couleur
             inversedBy: tissu

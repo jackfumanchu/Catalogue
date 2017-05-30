@@ -9,7 +9,7 @@ class Tissu
 	private $id;
 	private $name;
 	private $couleur;
-	private $product;
+//	private $product;
 	/**
      * @ORM\Column(type="string")
      *

@@ -9,7 +9,7 @@ class Options
 	private $id;
     private $name; // Le nom (label) associé à l'option. Par exemple, "Bande du haut" pour un carnet de santé à trois bandes
 	private $category; //Une catégorie seulement par option => Une catégorie a plusieurs options
-	private $product;
+//	private $product;
 	private $optiontissuproduit;
     /**
      * Constructor

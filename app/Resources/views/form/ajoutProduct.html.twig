@@ -85,18 +85,22 @@ Création d'un produit
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		{{ form_label(form.option, form.option.vars.label) }}
+		{{ form_label(form.optiontissuproduit, form.optiontissuproduit.vars.label) }}
 	</div>
 	<div class="panel-body">
 		<div class="form-group listofoptions" id="product_option" onload="removeBadLines()">
 			<div id="toberemovedOptions">
-				{{ form_errors(form.option) }}
-				{{ form_widget(form.option, {'attr': {'class': 'form-control', } }) }}
+				{{ form_errors(form.optiontissuproduit) }}
+				{{ form_widget(form.optiontissuproduit, {'attr': {'class': 'form-control', } }) }}
 			</div>
 		</div>
 	</div>
 </div>
-
+{# <div class="hidden">
+{{ form_row(form.option) }}
+{{ form_row(form.tissu) }}
+</div>
+#}
 <div class="form-group">
     {{ form_label(form.save, form.save.vars.label, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
     <div class="col-sm-10">

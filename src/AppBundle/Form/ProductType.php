@@ -76,11 +76,30 @@ class ProductType extends AbstractType
 				},
 				'placeholder' => '',
 			))
+/*			->add('option',  EntityType::class, array(
+				'class' => 'AppBundle:Options',
+				'choice_label' => 'name',
+				'multiple' => false,
+				'placeholder' => '',
+				'required' => false
+			))
+			->add('tissu',  EntityType::class, array(
+				'class' => 'AppBundle:Tissu',
+				'choice_label' => 'name',
+				'multiple' => false,
+				'placeholder' => '',
+				'required' => false,
+			))
+*/			->add('optiontissuproduit', CollectionType::class, array(
+				'entry_type'   => OptionTissuProduitType::class,
+				'allow_add'    => true,
+				'allow_delete' => true,
+			))
 			->add('save', SubmitType::class, array(
 				'label' => 'Ajouter le produit', 
 			))
 			;
-			$formModifier = function (FormInterface $form, Category $category = null) {
+/*			$formModifier = function (FormInterface $form, Category $category = null) {
 				$positions = null === $category ? array() : $this->em->getRepository('AppBundle:Category')->getAvailableOptions($category);
 				$form->add('option', EntityType::class, array(
 					'class'       => 'AppBundle:Options',
@@ -89,7 +108,6 @@ class ProductType extends AbstractType
 					'choice_label' => 'name',
 				));
 			};
-			// On ajoute une fonction qui va écouter un évènement
 			$builder->addEventListener(
 				FormEvents::PRE_SET_DATA,
 				function (FormEvent $event) use ($formModifier) {
@@ -100,15 +118,11 @@ class ProductType extends AbstractType
 			$builder->get('category')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) use ($formModifier) {
-                // It's important here to fetch $event->getForm()->getData(), as
-                // $event->getData() will get you the client data (that is, the ID)
                 $category = $event->getForm()->getData();
-                // since we've added the listener to the child, we'll have to pass on
-                // the parent to the callback functions!
                 $formModifier($event->getForm()->getParent(), $category);
             }
         );
-			
+*/			
 	}
 	public function __construct(array $options = array())
     {

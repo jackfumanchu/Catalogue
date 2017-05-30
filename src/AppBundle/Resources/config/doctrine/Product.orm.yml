@@ -24,29 +24,29 @@ AppBundle\Entity\Product:
             type: decimal
         prixMarche:
             type: decimal
-    manyToMany:
-        tissu:
-            targetEntity: Tissu
-            inversedBy: product
-            joinTable:
-                name: tissu_product
-                joinColumns:
-                    product_id:
-                        referencedColumnName: id
-                inverseJoinColumn:
-                    tissu_id:
-                        referencedColumnName: id
-        option:
-            targetEntity: Options
-            inversedBy: product
-            joinTable:
-                name: options_product
-                joinColumns:
-                    product_id:
-                        referencedColumnName: id
-                inverseJoinColumn:
-                    option_id:
-                        referencedColumnName: id
+#    manyToMany:
+#        tissu:
+#            targetEntity: Tissu
+#            inversedBy: product
+#            joinTable:
+#                name: tissu_product
+#                joinColumns:
+#                    product_id:
+#                        referencedColumnName: id
+#                inverseJoinColumn:
+#                    tissu_id:
+#                        referencedColumnName: id
+#        option:
+#            targetEntity: Options
+#            inversedBy: product
+#            joinTable:
+#                name: options_product
+#                joinColumns:
+#                    product_id:
+#                        referencedColumnName: id
+#                inverseJoinColumn:
+#                    option_id:
+#                        referencedColumnName: id
     manyToOne:
         category:
             targetEntity: Category

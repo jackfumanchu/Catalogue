@@ -50,9 +50,8 @@ class ProductsController extends Controller
 		$session->getFlashBag()->clear();
 		if ($form->isSubmitted() && $form->isValid()) {
 			$produit = $form->getData();
-//			$tissu = $produit->getTissu();
-//			$option = $produit->getOption();
-			$optiontissuproduit = new OptionTissuProduit();
+			$optiontissuproduit = $produit->getOptionTissuProduit();
+			dump($optiontissuproduit);
 			$file = $produit->getPicturepath();
 			if ($file)
 			{
@@ -62,20 +61,31 @@ class ProductsController extends Controller
 					$this->getParameter('img_produits_directory'),
 					$fileName
 				);
-//				foreach($option as $opt)
-//				{
-//					$optiontissuproduit[]->setOption($opt->getId())->setProduit($produit->getId())->setTissu($tissu[$i]->getId());
-//				}
 				$produit->setReference($this->calculateReference($produit));
 				$produit->setPicturepath($fileName);
+				foreach ($optiontissuproduit as $otp)
+				{
+					$otp->setProduit($produit);
+					$em->persist($otp);
+				}
+				
 				$em->persist($produit);
-				$em->persist($tissu);
-				$em->persist($option);
+//				$em->persist($tissu);
+//				$em->persist($option)
 //				$em->persist($optiontissuproduit);
 				$em->flush();
 				$session->getFlashBag()->add('success','Le produit de référence '.$produit->getReference().' et ayant pour Id '.$produit->getId().' a bien été ajouté !');
 				return $this->redirectToRoute('index');
+			} 
+			else
+			{
+				$session->getFlashBag()->add('error','Une erreur sur le fichier est parvenue <br/>Veuillez réessayer.');
 			}
+		}
+		elseif ($form->isSubmitted() && !$form->isValid())
+		{
+			$session->getFlashBag()->add('error','Aucun produit n\'a été ajouté');
+			return $this->redirectToRoute('index');
 		}
 		return $this->render('form/ajoutProduct.html.twig', array('form' => $form->createView(),));
     }
@@ -107,13 +117,14 @@ class ProductsController extends Controller
 		foreach ($options as $plop)
 		{
 			$message = $message . "<div class=\"form-group\">
-				<label class=\"col-sm-2 control-label required\" for=\"product_option_".$i."\">".$plop->getName()."</label>
+				<label class=\"col-sm-2 control-label required\" for=\"product_optiontissuproduit_tissu_".$i."\">".$plop->getName()."</label>
+				<input class=\"hidden\" type=\"textarea\" value=\"".$plop->getId()."\" name=\"product[optiontissuproduit][".$i."][option]\" id=\"product_optiontissuproduit_tissu_".$i."\"></input>
 				<div class=\"col-sm-10\">";
 				//Ici, la boucle avec les tissus.
 				$j = 0;
 				foreach ($tissus as $tissu)
 				{
-					$message = $message . "<input type=\"radio\" name=\"product_option_".$i."\" value=\"product_option_".$i."_".$tissu->getId()."\" id=\"product_option_".$i."_".$tissu->getId()."\"><label for=\"product_option_".$i."_".$tissu->getId()."\" width=\"50px\" height=\"50px\"><span></span><img src=\"img/tissus/".$tissu->getPicturepath()."\" width=\"50px\" height=\"50px\"></label></input>";
+					$message = $message . "<input type=\"radio\" name=\"product[optiontissuproduit][".$i."][tissu]\" value=\"".$tissu->getId()."\" id=\"optiontissuproduit_option_".$i."_".$tissu->getId()."\"><label for=\"optiontissuproduit_option_".$i."_".$tissu->getId()."\" width=\"50px\" height=\"50px\"><span></span><img src=\"img/tissus/".$tissu->getPicturepath()."\" width=\"50px\" height=\"50px\"></label></input>";
 					$j = $j + 1;
 				}
 			$message = $message . "</div></div>";
